@@ -184,3 +184,14 @@ function! RunSpecs(spec)
     execute substitute(g:spec_command, "{spec}", a:spec, "g")
   end
 endfunction
+
+" begin vspec config
+function! mocha#scope()
+  return s:
+endfunction
+
+function! mocha#sid()
+    return maparg('<SID>', 'n')
+endfunction
+nnoremap <SID> <SID>
+" end vspec config
