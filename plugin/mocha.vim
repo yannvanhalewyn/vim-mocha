@@ -91,7 +91,7 @@ function! RunAllSpecs()
   else
     let l:spec = ""
   endif
-  call SetLastSpecCommand(l:spec)
+  call s:SetLastSpecCommand(l:spec)
   call RunSpecs(l:spec)
 endfunction
 
@@ -99,8 +99,8 @@ endfunction
 function! RunCurrentSpecFile()
   if InSpecFile()
     let l:spec = @%
-    call SetLastSpecCommand(l:spec)
-    call SetLastSpecFile(@%)
+    call s:SetLastSpecCommand(l:spec)
+    call s:SetLastSpecFile(@%)
     call RunSpecs(l:spec)
   else
     call RunLastSpecFile()
@@ -112,9 +112,9 @@ function! RunNearestSpec()
   if InSpecFile()
     call s:GetNearestTest()
     let l:spec = @% . " -g '" . s:nearestTest . "'"
-    call SetLastSpecCommand(l:spec)
-    call SetLastSpecFile(@%)
-    call SetLastNearestSpec(l:spec)
+    call s:SetLastSpecCommand(l:spec)
+    call s:SetLastSpecFile(@%)
+    call s:SetLastNearestSpec(l:spec)
     call RunSpecs(l:spec)
   else
     call RunLastNearestSpec()
@@ -137,17 +137,17 @@ endfunction
 " =====================
 
 " Store last spec name
-function! SetLastNearestSpec(nearestSpec)
+function! s:SetLastNearestSpec(nearestSpec)
   let s:last_nearest_spec = a:nearestSpec
 endfunction
 
 " Store last spec file
-function! SetLastSpecFile(file)
+function! s:SetLastSpecFile(file)
   let s:last_spec_file = a:file
 endfunction
 
 " Cache Last Spec Command
-function! SetLastSpecCommand(spec)
+function! s:SetLastSpecCommand(spec)
   let s:last_spec_command = a:spec
 endfunction
 
